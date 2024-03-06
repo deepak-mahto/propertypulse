@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropertyCard from "@/components/PropertyCard";
 
 async function fetchProperties() {
@@ -19,7 +19,7 @@ const PropertiesPage = async () => {
   const properties = await fetchProperties();
 
   return (
-    <>
+    <Fragment>
       <section class="px-4 py-6">
         <div class="container-xl lg:container m-auto px-4 py-6">
           {properties.length === 0 ? (
@@ -33,7 +33,7 @@ const PropertiesPage = async () => {
           )}
         </div>
       </section>
-    </>
+    </Fragment>
   );
 };
 
