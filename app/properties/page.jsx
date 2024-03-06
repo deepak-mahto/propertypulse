@@ -18,8 +18,11 @@ async function fetchProperties() {
 const PropertiesPage = async () => {
   const properties = await fetchProperties();
 
+  // Sort properties by date
+  properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   return (
-    <Fragment>
+    <>
       <section class="px-4 py-6">
         <div class="container-xl lg:container m-auto px-4 py-6">
           {properties.length === 0 ? (
@@ -33,7 +36,7 @@ const PropertiesPage = async () => {
           )}
         </div>
       </section>
-    </Fragment>
+    </>
   );
 };
 
