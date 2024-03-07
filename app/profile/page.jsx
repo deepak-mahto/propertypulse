@@ -11,7 +11,6 @@ const ProfilePage = () => {
   const profileName = session?.user?.name;
   const profileEmail = session?.user?.email;
 
-
   return (
     <section className="bg-blue-50">
       <div className="container m-auto py-24">
