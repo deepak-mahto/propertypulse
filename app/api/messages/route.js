@@ -1,5 +1,5 @@
 import connectDB from "@/config/database";
-import Message from "@/models/message";
+import Message from "@/models/Message";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = "force-dynamic";
@@ -8,14 +8,18 @@ export const dynamic = "force-dynamic";
 
 export const POST = async (request) => {
   try {
-    connectDB();
+    await connectDB();
 
     const { name, email, phone, message, property, recipient } =
       await request.json();
 
     const sessionUser = await getSessionUser();
+
     if (!sessionUser || !sessionUser.user) {
-      return new Response("User ID is required", { status: 401 });
+      return new Response(
+        JSON.stringify({ message: "You must be logged in to send a message" }),
+        { status: 401 }
+      );
     }
 
     const { user } = sessionUser;
@@ -23,8 +27,8 @@ export const POST = async (request) => {
     // Can not send message to self
     if (user.id === recipient) {
       return new Response(
-        JSON.stringify({ message: "You must be logged in to send a message" }),
-        { status: 401 }
+        JSON.stringify({ message: "Can not send a message to yourself" }),
+        { status: 400 }
       );
     }
     const newMessage = new Message({
