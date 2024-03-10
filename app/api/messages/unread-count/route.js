@@ -1,5 +1,5 @@
 import connectDB from "@/config/database";
-import Message from "@/models/Message";
+import Message from "@/models/message";
 import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = "force-dynamic";
